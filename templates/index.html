@@ -1,0 +1,27 @@
+{% extends "common.html" %}
+  {% load static %}
+  {% block content %}
+
+    <h2>
+        Hello {{account.name|default:"there !"}}
+    </h2>
+    <a href="{% url "about" %}">About us</a>
+    
+    {% if account %}
+      <h3>User Profile</h3>
+      <p class="text-red"><b>Name: </b> {{account.name|title}} </p>
+      <p><b>Gender: </b> {{account.gender}} </p>
+      <p><b>Course: </b> {{account.course}} </p>
+      <p><b>Bio: </b> {{account.bio|truncatewords:10}} </p>
+    {% endif %}
+
+    <ul>
+      {% for student in students %}
+        <li>{{student}}</li>
+      {% endfor %}
+    </ul>
+
+    <img src="{% static "images/wall1.jpg" %}" alt="" height="300">
+  
+
+  {% endblock content %}
