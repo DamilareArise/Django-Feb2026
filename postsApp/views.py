@@ -1,23 +1,19 @@
 from django.shortcuts import render
+from .models import UserPost
 
 # Create your views here.
 
 def homeView(request):
-    
-    account = {
-        'name': "John Mark",
-        'gender': 'Male',
-        'course': 'Data science',
-        'bio': "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos, autem fugiat. Accusamus quis officiis sit ea? Quae pariatur, doloribus velit nam quas sapiente assumenda labore perferendis saepe tempora quis enim?"
-    }
-    
-    students = ['David', 'Samuel', 'Blessing', 'Rejoice']
-    
+    # blogs = UserPost.objects.all()
+    # blogs = UserPost.objects.filter(status="PUBLISHED")
+    # blogs = UserPost.objects.all().order_by("-updated_at")
+    # blogs = UserPost.objects.filter(author=request.user)
+    blogs = UserPost.objects.all()[:3]
     
     return render(
         request,
         template_name="index.html",
-        context={"account":account, "students": students}
+        context={"blogs": blogs}
     )
     
 
