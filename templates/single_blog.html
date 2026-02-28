@@ -1,0 +1,25 @@
+{% extends "common.html" %} 
+{% load static %} 
+{% block content %}
+
+    <section class="container py-4">
+        <div class="card" style="width: ;">
+            {% if blog.image %}
+            <img src="{{blog.image.url}}" class="card-img-top" alt="...">
+            {% else %}
+            <img src="..." class="card-img-top" alt="Blog-Img">
+            {% endif %}
+            <div class="card-body">
+            <h5 class="card-title">{{blog.title}}</h5>
+            <p class="card-text">{{blog.content}}</p>
+            <p class="card-text"><b>Author: </b> {{blog.author.first_name}} {{blog.author.last_name}} </p>
+            <p class="card-text"><b>Last updated: </b> {{blog.updated_at}} </p>
+            {% if request.user == blog.author %}
+                <a href="#" class="">Edit</a>
+                <a href="#" class="text-danger ms-2">Delete</a>
+            {% endif %}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
