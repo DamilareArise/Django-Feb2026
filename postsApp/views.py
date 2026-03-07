@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import UserPost
+from .forms import BlogForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -37,10 +39,39 @@ def allBlogsView(request):
     
     
 def singleBlogView(request, blog_id):
-    blog = UserPost.objects.get(id = blog_id)
+    blog = get_object_or_404(UserPost, id=blog_id)
     
     return render(
         request,
         template_name='single_blog.html',
         context={'blog': blog}
     )
+    
+    
+@login_required
+def AddBlogView(request):
+    if request.method == 'POST':
+        form = BlogForm(request.POST, request.FILES)
+        if form.is_valid():
+            blog=form.save(commit=False)
+            blog.author = request.user
+            blog.save()
+            
+        return redirect("home")
+    
+    else:
+        form = BlogForm()
+        return render(
+            request,
+            template_name="blogForm.html",
+            context={
+                "form": form
+            }
+        )
+        
+  
+@login_required      
+def deleteBlogView(request, blog_id):
+    blog = get_object_or_404(UserPost, id=blog_id)
+    blog.delete()
+    return redirect("home")

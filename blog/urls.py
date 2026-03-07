@@ -17,7 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from postsApp.views import homeView, aboutView, allBlogsView, singleBlogView
+from postsApp.views import homeView, aboutView, allBlogsView, singleBlogView, AddBlogView, deleteBlogView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -26,7 +26,9 @@ urlpatterns = [
     path("", homeView, name="home"),
     path("about/", aboutView, name="about"),
     path('blogs/', allBlogsView, name='blogs'),
-    path('single-blog/<int:blog_id>/', singleBlogView, name='single-blog')
+    path('single-blog/<int:blog_id>/', singleBlogView, name='single-blog'),
+    path('add-blog/', AddBlogView, name='add-blog'),
+    path('delete-blog/<int:blog_id>/', deleteBlogView, name="delete-blog")
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -16,7 +16,7 @@
             <p class="card-text"><b>Last updated: </b> {{blog.updated_at}} </p>
             {% if request.user == blog.author %}
                 <a href="#" class="">Edit</a>
-                <a href="#" class="text-danger ms-2">Delete</a>
+                <a href="{% url "delete-blog" blog.id %}" class="text-danger ms-2">Delete</a>
             {% endif %}
             </div>
         </div>
