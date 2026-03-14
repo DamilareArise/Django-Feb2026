@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "postsApp"
+    "postsApp",
+    "crispy_forms",
+    "crispy_bootstrap5"
+    
 ]
 # presentation <- middleware -> business/server <- middleware ->  data
 MIDDLEWARE = [
@@ -134,6 +137,8 @@ STATICFILES_DIRS = [
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / 'media'
 
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # MVC -> model, view and controller 
 

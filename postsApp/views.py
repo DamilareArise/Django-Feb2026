@@ -75,3 +75,26 @@ def deleteBlogView(request, blog_id):
     blog = get_object_or_404(UserPost, id=blog_id)
     blog.delete()
     return redirect("home")
+
+
+def editBlogView(request, blog_id):
+    blog = get_object_or_404(UserPost, id=blog_id)
+    if request.method == "POST":
+        form = BlogForm(request.POST, request.FILES, instance=blog)
+        if form.is_valid():
+            form.save()
+            
+        return redirect("single-blog", blog.id)
+        
+    
+    else:
+        form = BlogForm(instance=blog)
+        return render(
+            request,
+            template_name="blogForm.html",
+            context={
+                "form": form,
+                "action": "Edit"
+            }
+        )
+        
