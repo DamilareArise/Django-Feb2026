@@ -76,7 +76,7 @@ def deleteBlogView(request, blog_id):
     blog.delete()
     return redirect("home")
 
-
+@login_required
 def editBlogView(request, blog_id):
     blog = get_object_or_404(UserPost, id=blog_id)
     if request.method == "POST":
