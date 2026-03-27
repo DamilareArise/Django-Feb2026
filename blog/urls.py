@@ -20,6 +20,7 @@ from django.urls import path, include
 from postsApp.views import homeView, aboutView, allBlogsView, singleBlogView, AddBlogView, deleteBlogView,  editBlogView
 from django.conf import settings
 from django.conf.urls.static import static
+from userApp.views import SignupView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -30,7 +31,8 @@ urlpatterns = [
     path('add-blog/', AddBlogView, name='add-blog'),
     path('delete-blog/<int:blog_id>/', deleteBlogView, name="delete-blog"),
     path('edit-blog/<int:blog_id>/', editBlogView, name="edit-blog"),
-    path('accounts/', include("django.contrib.auth.urls"))
+    path('accounts/', include("django.contrib.auth.urls")),
+    path('signup/', SignupView.as_view(), name="signup")
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
