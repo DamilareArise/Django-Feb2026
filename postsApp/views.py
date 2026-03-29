@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import UserPost
 from .forms import BlogForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 
@@ -83,7 +84,9 @@ def editBlogView(request, blog_id):
         form = BlogForm(request.POST, request.FILES, instance=blog)
         if form.is_valid():
             form.save()
-            
+            messages.success(request, 'blog edited successfully')
+        else:
+            messages.error(request, 'An error ocurred while edit blog')
         return redirect("single-blog", blog.id)
         
     

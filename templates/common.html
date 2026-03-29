@@ -63,6 +63,23 @@
         </div>
       </div>
     </nav>
+    {% if messages %}
+      {% for message in messages %}
+        <p 
+          class="alert  
+          {% if message.tags == "success" %} 
+          alert-success 
+          {% else %} 
+          alert-danger 
+          {% endif %}
+           w-25
+           fixed-bottom
+           ms-1
+        ">
+          {{message}}
+        </p>
+      {% endfor %}
+    {% endif %}
 
     {% block content %}{% endblock content %}
 
